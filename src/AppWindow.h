@@ -17,11 +17,12 @@
 #include <CheckBox.h>
 #include <Menu.h>
 #include <MenuItem.h>
+#include <SeparatorView.h>
+#include <Spinner.h>
 #include <TextControl.h>
 #include <Window.h>
 
 #include "AppView.h"
-#include "RandoBox.h"
 #include "RandoTextView.h"
 #include "RandoMenuBar.h"
 
@@ -43,10 +44,10 @@ class AppWindow : public BWindow
 		BMenuItem		*QuitFileMenuItem;
 		
 		AppView			*MainView;
-		RandoTextView	*PassOut;		//Generated password output
+		BSeparatorView	*SeparatorPasswordView;
+		BTextControl	*PassOut;		//Generated password output
 		BButton			*GenerateBtn;
-		BTextControl	*PassLength;
-		RandoBox		*ParamsBox;
+		BSpinner		*PassLength;
 		BCheckBox		*UpperCaseCB;
 		BCheckBox		*LowerCaseCB;
 		BCheckBox		*NumCB;
