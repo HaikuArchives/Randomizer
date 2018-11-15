@@ -13,6 +13,7 @@
 #ifndef APPWINDOW_H
 #define APPWINDOW_H
 
+#include <Bitmap.h>
 #include <Button.h>
 #include <CheckBox.h>
 #include <Menu.h>
@@ -36,6 +37,7 @@ class AppWindow : public BWindow
 		virtual bool	QuitRequested();
 	private:
 				void	SetupMenuBar();	//Menu bar setup
+		BBitmap			*ResourceVectorToBitmap(const char *resName, float iconSize);
 		
 		//Menu bar
 		RandoMenuBar	*MenuBar;
@@ -47,6 +49,7 @@ class AppWindow : public BWindow
 		BSeparatorView	*SeparatorPasswordView;
 		BTextControl	*PassOut;		//Generated password output
 		BButton			*GenerateBtn;
+		BButton 		*CopyToClipboardBtn;
 		BSpinner		*PassLength;
 		BCheckBox		*UpperCaseCB;
 		BCheckBox		*LowerCaseCB;

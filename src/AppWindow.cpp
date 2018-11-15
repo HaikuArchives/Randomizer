@@ -11,7 +11,11 @@
 //========================================================================
 
 #include <Catalog.h>
+#include <Clipboard.h>
+#include <IconUtils.h>
 #include <LayoutBuilder.h>
+#include <Resources.h>
+#include <Roster.h>
 
 #include <string>
 
@@ -71,6 +75,18 @@ AppWindow::AppWindow(BRect frame)
 	GenerateBtn->MakeDefault(true);
 	GenerateBtn->ResizeToPreferred();
 
+
+	font_height fh;
+	PassOut->GetFontHeight(&fh);
+
+	const float iconSize = ceilf(fh.ascent) - 2.0;
+
+	CopyToClipboardBtn = new BButton("CopyToClipboardBtn", "",
+		new BMessage(COPY_BTN_MSG));
+	CopyToClipboardBtn->SetIcon(ResourceVectorToBitmap("CLIPBOARD", iconSize));
+	CopyToClipboardBtn->ResizeToPreferred();
+
+
 	BSeparatorView* separatorSettingsView = new BSeparatorView("settings", "Password settings",
 		B_HORIZONTAL, B_FANCY_BORDER, BAlignment(B_ALIGN_LEFT,
 											B_ALIGN_VERTICAL_CENTER));
@@ -95,7 +111,10 @@ AppWindow::AppWindow(BRect frame)
 		.Add(SeparatorPasswordView)
 		.AddGroup(B_VERTICAL)
 			.SetInsets(B_USE_WINDOW_INSETS, 0, B_USE_WINDOW_INSETS, B_USE_WINDOW_INSETS)
-			.Add(PassOut)
+			.AddGroup(B_HORIZONTAL, 0)
+				.Add(PassOut)
+				.Add(CopyToClipboardBtn)
+			.End()
 			.AddGroup(B_HORIZONTAL)
 				.AddGlue()
 				.Add(GenerateBtn)
@@ -104,7 +123,7 @@ AppWindow::AppWindow(BRect frame)
 
 	PassOut->Hide();
 	SeparatorPasswordView->Hide();
-
+	CopyToClipboardBtn->Hide();
 	// Is this useful?
 
 	UpperCaseCB->SetToolTip("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
@@ -159,7 +178,14 @@ void AppWindow::MessageReceived(BMessage* message)
 			PassOut->SetText(password);
 			PassOut->Show();
 			SeparatorPasswordView->Show();
+			CopyToClipboardBtn->Show();
 			delete[] password;
+		}
+		break;
+		case COPY_BTN_MSG:
+		{
+			PassOut->TextView()->SelectAll();
+			PassOut->TextView()->Copy(be_clipboard);
 		}
 		break;
 		case CUST_SYMB_CB_MSG:	//Custom symbols checkbox set/unset
@@ -198,3 +224,25 @@ void AppWindow::SetupMenuBar()
 	FileMenu->AddItem(QuitFileMenuItem);
 }
 
+BBitmap* AppWindow::ResourceVectorToBitmap(const char *resName, float iconSize)
+{
+	BResources res;
+	size_t size;
+	app_info appInfo;
+
+	be_app->GetAppInfo(&appInfo);
+	BFile appFile(&appInfo.ref, B_READ_ONLY);
+	res.SetTo(&appFile);
+	BBitmap *aBmp = NULL;
+	const uint8* iconData = (const uint8*) res.LoadResource('VICN', resName, &size);
+
+	if (size > 0 ) {
+		aBmp = new BBitmap (BRect(0,0, iconSize, iconSize), 0, B_RGBA32);
+		status_t result = BIconUtils::GetVectorIcon(iconData, size, aBmp);
+		if (result != B_OK) {
+			delete aBmp;
+			aBmp = NULL;
+		}
+	}
+	return aBmp;
+}
