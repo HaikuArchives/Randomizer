@@ -12,8 +12,10 @@
 
 #include <Catalog.h>
 #include <Clipboard.h>
+#include <FindDirectory.h>
 #include <IconUtils.h>
 #include <LayoutBuilder.h>
+#include <Path.h>
 #include <Resources.h>
 #include <Roster.h>
 
@@ -21,6 +23,8 @@
 
 #include "AppWindow.h"
 #include "App.h"
+
+#define PREFS_FILENAME "Randomizer_settings"
 
 #undef B_TRANSLATION_CONTEXT
 #define B_TRANSLATION_CONTEXT "AppWindow"
@@ -119,14 +123,16 @@ AppWindow::AppWindow(BRect frame)
 	SpecSymbCB->SetToolTip("!@#$%^&*");
 	CustSymbCB->SetToolTip(B_TRANSLATE("Custom set of characters"));
 
-	GeneratePassword();
+	UnarchivePreferences();
 
+	GeneratePassword();
 }
 
 //--------------------------------------------------------------------
 
 bool AppWindow::QuitRequested()
 {
+	ArchivePreferences();
 	be_app->PostMessage(B_QUIT_REQUESTED);
 	return true;
 }
@@ -244,4 +250,82 @@ BBitmap* AppWindow::ResourceVectorToBitmap(const char *resName, float iconSize)
 		}
 	}
 	return aBmp;
+}
+
+BFile
+AppWindow::PrefsFile(int32 mode)
+{
+	BPath path;
+	find_directory(B_USER_SETTINGS_DIRECTORY, &path);
+	path.SetTo(path.Path(), PREFS_FILENAME);
+
+	return BFile(path.Path(), mode);
+}
+
+void
+AppWindow::SavePreferences(BMessage& msg)
+{
+	BFile file = PrefsFile(B_WRITE_ONLY | B_CREATE_FILE);
+	file.SetSize(0);
+	msg.Flatten(&file);
+}
+
+void
+AppWindow::LoadPreferences(BMessage& msg)
+{
+	BFile file = PrefsFile(B_READ_ONLY);
+	msg.Unflatten(&file);
+}
+
+void
+AppWindow::ArchivePreferences()
+{
+	BMessage message;
+	message.AddInt32("PassLength", PassLength->Value());
+	message.AddBool("UpperCaseCB", UpperCaseCB->Value() == B_CONTROL_ON);
+	message.AddBool("LowerCaseCB", LowerCaseCB->Value() == B_CONTROL_ON);
+	message.AddBool("NumCB", NumCB->Value() == B_CONTROL_ON);
+	message.AddBool("SpecSymbCB", SpecSymbCB->Value() == B_CONTROL_ON);
+	message.AddBool("CustSymbCB", CustSymbCB->Value() == B_CONTROL_ON);
+	message.AddString("CustSymb", CustSymb->Text());
+	SavePreferences(message);
+}
+
+void
+AppWindow::UnarchivePreferences()
+{	BMessage message;
+	LoadPreferences(message);
+
+	int32 length;
+	if (message.FindInt32("PassLength", &length) == B_OK)
+	{
+		PassLength->SetValue(length);
+	}
+	bool controlOn;
+	if (message.FindBool("UpperCaseCB", &controlOn) == B_OK)
+	{
+		UpperCaseCB->SetValue(controlOn ? B_CONTROL_ON : B_CONTROL_OFF);
+	}
+	if (message.FindBool("LowerCaseCB", &controlOn) == B_OK)
+	{
+		LowerCaseCB->SetValue(controlOn ? B_CONTROL_ON : B_CONTROL_OFF);
+	}
+	if (message.FindBool("NumCB", &controlOn) == B_OK)
+	{
+		NumCB->SetValue(controlOn ? B_CONTROL_ON : B_CONTROL_OFF);
+	}
+	if (message.FindBool("SpecSymbCB", &controlOn) == B_OK)
+	{
+		SpecSymbCB->SetValue(controlOn ? B_CONTROL_ON : B_CONTROL_OFF);
+	}
+	if (message.FindBool("CustSymbCB", &controlOn) == B_OK)
+	{
+		CustSymbCB->SetValue(controlOn ? B_CONTROL_ON : B_CONTROL_OFF);
+		CustSymb->SetEnabled(controlOn);
+	}
+	BString symbols;
+	if (message.FindString("CustSymb", &symbols) == B_OK)
+	{
+		CustSymb->SetText(symbols);
+	}
 }

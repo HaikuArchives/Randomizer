@@ -37,7 +37,14 @@ class AppWindow : public BWindow
 				void	SetupMenuBar();	//Menu bar setup
 				void	GeneratePassword();
 		BBitmap			*ResourceVectorToBitmap(const char *resName, float iconSize);
-		
+
+		BFile			PrefsFile(int32 mode);
+		void			SavePreferences(BMessage& msg);
+		void			LoadPreferences(BMessage& msg);
+
+		void			ArchivePreferences();
+		void			UnarchivePreferences();
+
 		//Menu bar
 		RandoMenuBar	*MenuBar;
 		BMenu			*FileMenu;
