@@ -13,17 +13,15 @@
 #ifndef APPWINDOW_H
 #define APPWINDOW_H
 
+#include <Bitmap.h>
 #include <Button.h>
 #include <CheckBox.h>
 #include <Menu.h>
+#include <MenuBar.h>
 #include <MenuItem.h>
+#include <Spinner.h>
 #include <TextControl.h>
 #include <Window.h>
-
-#include "AppView.h"
-#include "RandoBox.h"
-#include "RandoTextView.h"
-#include "RandoMenuBar.h"
 
 //====================================================================
 
@@ -34,19 +32,21 @@ class AppWindow : public BWindow
 		virtual void	MessageReceived(BMessage* message);
 		virtual bool	QuitRequested();
 	private:
-				void	SetupMenuBar();	//Menu bar setup
-		
-		//Menu bar
-		RandoMenuBar	*MenuBar;
-		BMenu			*FileMenu;
-		BMenuItem		*AboutFileMenuItem;
-		BMenuItem		*QuitFileMenuItem;
-		
-		AppView			*MainView;
-		RandoTextView	*PassOut;		//Generated password output
+		BMenuBar*		BuildMenuBar();	//Menu bar setup
+		void			GeneratePassword();
+		BBitmap			*ResourceVectorToBitmap(const char *resName, float iconSize);
+
+		BFile			PrefsFile(int32 mode);
+		void			SavePreferences(BMessage& msg);
+		void			LoadPreferences(BMessage& msg);
+
+		void			ArchivePreferences();
+		void			UnarchivePreferences();
+
+		BTextControl	*PassOut;		//Generated password output
 		BButton			*GenerateBtn;
-		BTextControl	*PassLength;
-		RandoBox		*ParamsBox;
+		BButton 		*CopyToClipboardBtn;
+		BSpinner		*PassLength;
 		BCheckBox		*UpperCaseCB;
 		BCheckBox		*LowerCaseCB;
 		BCheckBox		*NumCB;

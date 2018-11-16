@@ -18,6 +18,7 @@ TYPE=APP
 
 #	add support for new Pe and Eddie features
 #	to fill in generic makefile
+APP_MIME_SIG=application/x-vnd.kazenyuk-randomizer
 
 #%{
 # @src->@
@@ -30,8 +31,7 @@ TYPE=APP
 #	if two source files with the same name (source.c or source.cpp)
 #	are included from different directories.  Also note that spaces
 #	in folder names do not work well with this makefile.
-SRCS=App.cpp AppView.cpp AppWindow.cpp Generator.cpp main.cpp \
-RandoBox.cpp RandoMenuBar.cpp RandoTextView.cpp
+SRCS=App.cpp AppWindow.cpp Generator.cpp main.cpp
 
 #	specify the resource definition files to use
 #	full path or a relative path to the resource file can be used.
@@ -57,7 +57,7 @@ RSRCS=
 #		naming scheme you need to specify the path to the library
 #		and it's name
 #		library: my_lib.a entry: my_lib.a or path/my_lib.a
-LIBS=be $(STDCPPLIBS)
+LIBS= $(STDCPPLIBS) be localestub
 
 #	specify additional paths to directories following the standard
 #	libXXX.so or libXXX.a naming scheme.  You can specify full paths
@@ -70,7 +70,7 @@ LIBPATHS=
 #	additional paths to look for system headers
 #	thes use the form: #include <header>
 #	source file directories are NOT auto-included here
-SYSTEM_INCLUDE_PATHS =
+SYSTEM_INCLUDE_PATHS = $(shell findpaths -e B_FIND_PATH_HEADERS_DIRECTORY private/interface)
 
 #	additional paths to look for local headers
 #	thes use the form: #include "header"

@@ -16,6 +16,7 @@
 // Message commands (message->what)
 //====================================================================
 const uint32 GEN_BTN_MSG	= 'Gen';
+const uint32 COPY_BTN_MSG	= 'CopC';
 const uint32 SEQ_MSG		= 'Sequ';
 const uint32 SEQ_LEN_MSG	= 'SNum';
 const uint32 CUST_SYMB_MSG	= 'CusS';
