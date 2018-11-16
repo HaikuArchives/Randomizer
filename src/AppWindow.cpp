@@ -121,16 +121,11 @@ AppWindow::AppWindow(BRect frame)
 			.End()
 		.End();
 
-	PassOut->Hide();
-	SeparatorPasswordView->Hide();
-	CopyToClipboardBtn->Hide();
-	// Is this useful?
-
-	UpperCaseCB->SetToolTip("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-	LowerCaseCB->SetToolTip("abcdefghijklmnopqrstuvwxyz");
-	NumCB->SetToolTip("0123456789");
 	SpecSymbCB->SetToolTip("!@#$%^&*");
 	CustSymbCB->SetToolTip(B_TRANSLATE("Custom set of characters"));
+
+	GeneratePassword();
+
 }
 
 //--------------------------------------------------------------------
@@ -153,33 +148,7 @@ void AppWindow::MessageReceived(BMessage* message)
 	{
 		case GEN_BTN_MSG:
 		{
-			const char en_upsymbols[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-			const char en_lowsymbols[] = "abcdefghijklmnopqrstuvwxyz";
-			const char num_symbols[] = "0123456789";
-			const char spec_symbols[] = "!@#$%^&*";	//<-------
-			
-			PassOut->SetText("");
-			
-			string* symbols = new string;
-			if (UpperCaseCB->Value() == B_CONTROL_ON)
-				*symbols += en_upsymbols;
-			if (LowerCaseCB->Value() == B_CONTROL_ON)
-				*symbols += en_lowsymbols;
-			if (NumCB->Value() == B_CONTROL_ON)
-				*symbols += num_symbols;
-			if (SpecSymbCB->Value() == B_CONTROL_ON)
-				*symbols += spec_symbols;
-			if (CustSymbCB->Value() == B_CONTROL_ON)
-				*symbols += CustSymb->Text();
-			int pass_length = PassLength->Value();
-			char* password = new char [pass_length];			
-			Generator(password, pass_length, symbols->c_str());
-			delete symbols;
-			PassOut->SetText(password);
-			PassOut->Show();
-			SeparatorPasswordView->Show();
-			CopyToClipboardBtn->Show();
-			delete[] password;
+			GeneratePassword();
 		}
 		break;
 		case COPY_BTN_MSG:
@@ -216,12 +185,46 @@ void AppWindow::SetupMenuBar()
 	AboutFileMenuItem = new BMenuItem(B_TRANSLATE("About"), new BMessage(B_ABOUT_REQUESTED),
 		0, 0);
 	FileMenu->AddItem(AboutFileMenuItem);
-	
+
 	FileMenu->AddSeparatorItem();
-	
+
+	FileMenu->AddItem(new BMenuItem(B_TRANSLATE("Copy to clipboard"), new BMessage(COPY_BTN_MSG),
+		'C', 0));
+
+	FileMenu->AddSeparatorItem();
+
 	QuitFileMenuItem = new BMenuItem(B_TRANSLATE("Quit"), new BMessage(B_QUIT_REQUESTED),
 		'Q', 0);
+
 	FileMenu->AddItem(QuitFileMenuItem);
+}
+
+void AppWindow::GeneratePassword()
+{
+	const char en_upsymbols[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	const char en_lowsymbols[] = "abcdefghijklmnopqrstuvwxyz";
+	const char num_symbols[] = "0123456789";
+	const char spec_symbols[] = "!@#$%^&*";	//<-------
+
+	PassOut->SetText("");
+
+	string* symbols = new string;
+	if (UpperCaseCB->Value() == B_CONTROL_ON)
+		*symbols += en_upsymbols;
+	if (LowerCaseCB->Value() == B_CONTROL_ON)
+		*symbols += en_lowsymbols;
+	if (NumCB->Value() == B_CONTROL_ON)
+		*symbols += num_symbols;
+	if (SpecSymbCB->Value() == B_CONTROL_ON)
+		*symbols += spec_symbols;
+	if (CustSymbCB->Value() == B_CONTROL_ON)
+		*symbols += CustSymb->Text();
+	int pass_length = PassLength->Value();
+	char* password = new char [pass_length];
+	Generator(password, pass_length, symbols->c_str());
+	delete symbols;
+	PassOut->SetText(password);
+	delete[] password;
 }
 
 BBitmap* AppWindow::ResourceVectorToBitmap(const char *resName, float iconSize)

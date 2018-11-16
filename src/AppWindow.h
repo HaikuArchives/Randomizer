@@ -37,6 +37,7 @@ class AppWindow : public BWindow
 		virtual bool	QuitRequested();
 	private:
 				void	SetupMenuBar();	//Menu bar setup
+				void	GeneratePassword();
 		BBitmap			*ResourceVectorToBitmap(const char *resName, float iconSize);
 		
 		//Menu bar
