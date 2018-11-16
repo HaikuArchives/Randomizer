@@ -35,8 +35,6 @@ AppWindow::AppWindow(BRect frame)
 	: BWindow(frame, B_TRANSLATE_SYSTEM_NAME(App_Name), B_TITLED_WINDOW,
 		B_NOT_RESIZABLE|B_NOT_ZOOMABLE | B_AUTO_UPDATE_SIZE_LIMITS)
 {
-	MainView = new AppView(Bounds());
-
 	PassOut = new BTextControl("PassOut", "", NULL, NULL);
 	PassOut->SetEnabled(false);
 
@@ -73,8 +71,6 @@ AppWindow::AppWindow(BRect frame)
 	GenerateBtn = new BButton("GenBtn", B_TRANSLATE("Generate"),
 		new BMessage(GEN_BTN_MSG));
 	GenerateBtn->MakeDefault(true);
-	GenerateBtn->ResizeToPreferred();
-
 
 	font_height fh;
 	PassOut->GetFontHeight(&fh);
@@ -84,8 +80,7 @@ AppWindow::AppWindow(BRect frame)
 	CopyToClipboardBtn = new BButton("CopyToClipboardBtn", "",
 		new BMessage(COPY_BTN_MSG));
 	CopyToClipboardBtn->SetIcon(ResourceVectorToBitmap("CLIPBOARD", iconSize));
-	CopyToClipboardBtn->ResizeToPreferred();
-
+	CopyToClipboardBtn->SetToolTip(B_TRANSLATE("Copy to clipboard"));
 
 	BSeparatorView* separatorSettingsView = new BSeparatorView("settings", "Password settings",
 		B_HORIZONTAL, B_FANCY_BORDER, BAlignment(B_ALIGN_LEFT,
@@ -177,7 +172,6 @@ void AppWindow::SetupMenuBar()
 {
 	MenuBar = new RandoMenuBar(BRect(0,0,0,0), "menubar",
 		B_FOLLOW_LEFT_RIGHT|B_FOLLOW_TOP, B_ITEMS_IN_ROW, true);
-//	MainView->AddChild(MenuBar);
 	
 	FileMenu = new BMenu(B_TRANSLATE("App"));
 	MenuBar->AddItem(FileMenu);
@@ -208,21 +202,23 @@ void AppWindow::GeneratePassword()
 
 	PassOut->SetText("");
 
-	string* symbols = new string;
+	string symbols;
 	if (UpperCaseCB->Value() == B_CONTROL_ON)
-		*symbols += en_upsymbols;
+		symbols += en_upsymbols;
 	if (LowerCaseCB->Value() == B_CONTROL_ON)
-		*symbols += en_lowsymbols;
+		symbols += en_lowsymbols;
 	if (NumCB->Value() == B_CONTROL_ON)
-		*symbols += num_symbols;
+		symbols += num_symbols;
 	if (SpecSymbCB->Value() == B_CONTROL_ON)
-		*symbols += spec_symbols;
+		symbols += spec_symbols;
 	if (CustSymbCB->Value() == B_CONTROL_ON)
-		*symbols += CustSymb->Text();
+		symbols += CustSymb->Text();
+
 	int pass_length = PassLength->Value();
 	char* password = new char [pass_length];
-	Generator(password, pass_length, symbols->c_str());
-	delete symbols;
+
+	Generator(password, pass_length, symbols.c_str());
+
 	PassOut->SetText(password);
 	delete[] password;
 }

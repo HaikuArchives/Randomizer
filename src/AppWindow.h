@@ -23,8 +23,6 @@
 #include <TextControl.h>
 #include <Window.h>
 
-#include "AppView.h"
-#include "RandoTextView.h"
 #include "RandoMenuBar.h"
 
 //====================================================================
@@ -45,8 +43,7 @@ class AppWindow : public BWindow
 		BMenu			*FileMenu;
 		BMenuItem		*AboutFileMenuItem;
 		BMenuItem		*QuitFileMenuItem;
-		
-		AppView			*MainView;
+
 		BSeparatorView	*SeparatorPasswordView;
 		BTextControl	*PassOut;		//Generated password output
 		BButton			*GenerateBtn;
