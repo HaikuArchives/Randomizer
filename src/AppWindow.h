@@ -17,13 +17,11 @@
 #include <Button.h>
 #include <CheckBox.h>
 #include <Menu.h>
+#include <MenuBar.h>
 #include <MenuItem.h>
-#include <SeparatorView.h>
 #include <Spinner.h>
 #include <TextControl.h>
 #include <Window.h>
-
-#include "RandoMenuBar.h"
 
 //====================================================================
 
@@ -34,8 +32,8 @@ class AppWindow : public BWindow
 		virtual void	MessageReceived(BMessage* message);
 		virtual bool	QuitRequested();
 	private:
-				void	SetupMenuBar();	//Menu bar setup
-				void	GeneratePassword();
+		BMenuBar*		BuildMenuBar();	//Menu bar setup
+		void			GeneratePassword();
 		BBitmap			*ResourceVectorToBitmap(const char *resName, float iconSize);
 
 		BFile			PrefsFile(int32 mode);
@@ -45,13 +43,6 @@ class AppWindow : public BWindow
 		void			ArchivePreferences();
 		void			UnarchivePreferences();
 
-		//Menu bar
-		RandoMenuBar	*MenuBar;
-		BMenu			*FileMenu;
-		BMenuItem		*AboutFileMenuItem;
-		BMenuItem		*QuitFileMenuItem;
-
-		BSeparatorView	*SeparatorPasswordView;
 		BTextControl	*PassOut;		//Generated password output
 		BButton			*GenerateBtn;
 		BButton 		*CopyToClipboardBtn;

@@ -18,6 +18,7 @@
 #include <Path.h>
 #include <Resources.h>
 #include <Roster.h>
+#include <SeparatorView.h>
 
 #include <string>
 
@@ -86,19 +87,14 @@ AppWindow::AppWindow(BRect frame)
 	CopyToClipboardBtn->SetIcon(ResourceVectorToBitmap("CLIPBOARD", iconSize));
 	CopyToClipboardBtn->SetToolTip(B_TRANSLATE("Copy to clipboard"));
 
-	BSeparatorView* separatorSettingsView = new BSeparatorView("settings", "Password settings",
-		B_HORIZONTAL, B_FANCY_BORDER, BAlignment(B_ALIGN_LEFT,
-											B_ALIGN_VERTICAL_CENTER));
-	SeparatorPasswordView = new BSeparatorView("settings", B_TRANSLATE("Generated password"),
-		B_HORIZONTAL, B_FANCY_BORDER, BAlignment(B_ALIGN_LEFT,
-											B_ALIGN_VERTICAL_CENTER));
-	SetupMenuBar();
-	separatorSettingsView->Hide();
+	BSeparatorView* separatorPasswordView = new BSeparatorView("generatedPassword",
+		B_TRANSLATE("Generated password"), B_HORIZONTAL, B_FANCY_BORDER,
+		BAlignment(B_ALIGN_LEFT, B_ALIGN_VERTICAL_CENTER));
+
 	BLayoutBuilder::Group<>(this, B_VERTICAL, B_USE_SMALL_SPACING)
-		.Add(MenuBar)
-		.Add(separatorSettingsView)
+		.Add(BuildMenuBar())
 		.AddGrid()
-			.SetInsets(B_USE_WINDOW_INSETS, 0, B_USE_WINDOW_INSETS, B_USE_WINDOW_INSETS)
+			.SetInsets(B_USE_WINDOW_INSETS, B_USE_HALF_ITEM_INSETS, B_USE_WINDOW_INSETS, B_USE_WINDOW_INSETS)
 			.Add(UpperCaseCB, 0, 0)
 			.Add(LowerCaseCB, 0, 1)
 			.Add(NumCB, 1, 0)
@@ -107,7 +103,7 @@ AppWindow::AppWindow(BRect frame)
 			.Add(CustSymb, 1, 2)
 			.Add(PassLength, 0, 3, 2)
 		.End()
-		.Add(SeparatorPasswordView)
+		.Add(separatorPasswordView)
 		.AddGroup(B_VERTICAL)
 			.SetInsets(B_USE_WINDOW_INSETS, 0, B_USE_WINDOW_INSETS, B_USE_WINDOW_INSETS)
 			.AddGroup(B_HORIZONTAL, 0)
@@ -174,29 +170,27 @@ void AppWindow::MessageReceived(BMessage* message)
 
 //--------------------------------------------------------------------
 
-void AppWindow::SetupMenuBar()
+BMenuBar* AppWindow::BuildMenuBar()
 {
-	MenuBar = new RandoMenuBar(BRect(0,0,0,0), "menubar",
-		B_FOLLOW_LEFT_RIGHT|B_FOLLOW_TOP, B_ITEMS_IN_ROW, true);
+	BMenuBar* menuBar = new BMenuBar("menubar");
+	BMenu* menu = new BMenu(B_TRANSLATE("App"));
+
+	menuBar->AddItem(menu);
 	
-	FileMenu = new BMenu(B_TRANSLATE("App"));
-	MenuBar->AddItem(FileMenu);
-	
-	AboutFileMenuItem = new BMenuItem(B_TRANSLATE("About"), new BMessage(B_ABOUT_REQUESTED),
-		0, 0);
-	FileMenu->AddItem(AboutFileMenuItem);
+	menu->AddItem(new BMenuItem(B_TRANSLATE("About"),
+		new BMessage(B_ABOUT_REQUESTED), 0, 0));
 
-	FileMenu->AddSeparatorItem();
+	menu->AddSeparatorItem();
 
-	FileMenu->AddItem(new BMenuItem(B_TRANSLATE("Copy to clipboard"), new BMessage(COPY_BTN_MSG),
-		'C', 0));
+	menu->AddItem(new BMenuItem(B_TRANSLATE("Copy to clipboard"),
+		new BMessage(COPY_BTN_MSG), 'C', 0));
 
-	FileMenu->AddSeparatorItem();
+	menu->AddSeparatorItem();
 
-	QuitFileMenuItem = new BMenuItem(B_TRANSLATE("Quit"), new BMessage(B_QUIT_REQUESTED),
-		'Q', 0);
+	menu->AddItem(new BMenuItem(B_TRANSLATE("Quit"),
+		new BMessage(B_QUIT_REQUESTED), 'Q', 0));
 
-	FileMenu->AddItem(QuitFileMenuItem);
+	return menuBar;
 }
 
 void AppWindow::GeneratePassword()
@@ -298,34 +292,21 @@ AppWindow::UnarchivePreferences()
 
 	int32 length;
 	if (message.FindInt32("PassLength", &length) == B_OK)
-	{
 		PassLength->SetValue(length);
-	}
 	bool controlOn;
 	if (message.FindBool("UpperCaseCB", &controlOn) == B_OK)
-	{
 		UpperCaseCB->SetValue(controlOn ? B_CONTROL_ON : B_CONTROL_OFF);
-	}
 	if (message.FindBool("LowerCaseCB", &controlOn) == B_OK)
-	{
 		LowerCaseCB->SetValue(controlOn ? B_CONTROL_ON : B_CONTROL_OFF);
-	}
 	if (message.FindBool("NumCB", &controlOn) == B_OK)
-	{
 		NumCB->SetValue(controlOn ? B_CONTROL_ON : B_CONTROL_OFF);
-	}
 	if (message.FindBool("SpecSymbCB", &controlOn) == B_OK)
-	{
 		SpecSymbCB->SetValue(controlOn ? B_CONTROL_ON : B_CONTROL_OFF);
-	}
-	if (message.FindBool("CustSymbCB", &controlOn) == B_OK)
-	{
+	if (message.FindBool("CustSymbCB", &controlOn) == B_OK)	{
 		CustSymbCB->SetValue(controlOn ? B_CONTROL_ON : B_CONTROL_OFF);
 		CustSymb->SetEnabled(controlOn);
 	}
 	BString symbols;
 	if (message.FindString("CustSymb", &symbols) == B_OK)
-	{
 		CustSymb->SetText(symbols);
-	}
 }
