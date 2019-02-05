@@ -3,6 +3,7 @@
 //
 //	Copyright 2005-2009 Sergey Kazenyuk, All Rights Reserved.
 //  Copyright 2018 Janus
+//  Copyright 2019 Humdinger
 //	Distributed under the terms of the MIT License.
 //========================================================================
 //	$Id: AppWindow.cpp 12 2009-02-02 08:51:09Z sergey.kazenyuk $
@@ -91,34 +92,41 @@ AppWindow::AppWindow(BRect frame)
 
 	BSeparatorView* separatorPasswordView = new BSeparatorView(
 		"generatedPassword", B_TRANSLATE("Generated password"), B_HORIZONTAL,
-		B_FANCY_BORDER, BAlignment(B_ALIGN_LEFT, B_ALIGN_VERTICAL_CENTER));
+		B_FANCY_BORDER, BAlignment(B_ALIGN_CENTER, B_ALIGN_VERTICAL_CENTER));
 
-	BLayoutBuilder::Group<>(this, B_VERTICAL, B_USE_SMALL_SPACING)
+	BLayoutBuilder::Group<>(this, B_VERTICAL, 0)
 		.Add(BuildMenuBar())
-		.AddGrid()
-		.SetInsets(B_USE_WINDOW_INSETS, B_USE_HALF_ITEM_INSETS,
-			B_USE_WINDOW_INSETS, B_USE_WINDOW_INSETS)
-		.Add(UpperCaseCB, 0, 0)
-		.Add(LowerCaseCB, 0, 1)
-		.Add(NumCB, 1, 0)
-		.Add(SpecSymbCB, 1, 1)
-		.Add(CustSymbCB, 0, 2)
-		.Add(CustSymb, 1, 2)
-		.Add(PassLength, 0, 3, 2)
-		.End()
-		.Add(separatorPasswordView)
-		.AddGroup(B_VERTICAL)
-		.SetInsets(
-			B_USE_WINDOW_INSETS, 0, B_USE_WINDOW_INSETS, B_USE_WINDOW_INSETS)
+		.AddGrid(B_USE_DEFAULT_SPACING, 0, 1)
+			.SetInsets(B_USE_WINDOW_INSETS, B_USE_WINDOW_INSETS,
+				B_USE_WINDOW_INSETS, B_USE_WINDOW_INSETS)
+			.Add(UpperCaseCB, 0, 0)
+			.Add(LowerCaseCB, 0, 1)
+			.Add(NumCB, 1, 0)
+			.Add(SpecSymbCB, 1, 1)
+			.Add(CustSymbCB, 0, 2)
+			.Add(CustSymb, 1, 2)
+			.End()
 		.AddGroup(B_HORIZONTAL, 0)
-		.Add(PassOut)
-		.Add(CopyToClipboardBtn)
-		.End()
-		.AddGroup(B_HORIZONTAL)
-		.AddGlue()
-		.Add(GenerateBtn)
-		.End()
-		.End();
+			.SetInsets(
+				B_USE_WINDOW_INSETS, 0, B_USE_WINDOW_INSETS, B_USE_WINDOW_INSETS)
+			.Add(PassLength)
+			.End()
+		.AddStrut(B_USE_DEFAULT_SPACING)
+		.Add(separatorPasswordView)
+		.AddGroup(B_VERTICAL, B_USE_DEFAULT_SPACING)
+			.SetInsets(
+				B_USE_WINDOW_INSETS, B_USE_WINDOW_INSETS, B_USE_WINDOW_INSETS,
+					B_USE_WINDOW_INSETS)
+			.AddGroup(B_HORIZONTAL, 0)
+				.Add(PassOut)
+				.Add(CopyToClipboardBtn)
+				.End()
+			.AddGroup(B_HORIZONTAL)
+				.AddGlue()
+				.Add(GenerateBtn)
+				.AddGlue()
+				.End()
+			.End();
 
 	SpecSymbCB->SetToolTip("!@#$%^&*");
 	CustSymbCB->SetToolTip(B_TRANSLATE("Custom set of characters"));
