@@ -2,6 +2,7 @@
 //	Constants.h
 //	Miscellaneous constants and definitions
 //	Copyright 2005-2008 Sergey Kazenyuk, All Rights Reserved.
+//  Copyright 2018 Janus
 //	Distributed under the terms of the MIT License.
 //========================================================================
 

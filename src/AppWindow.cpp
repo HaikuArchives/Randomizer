@@ -2,6 +2,7 @@
 //	AppWindow.cpp
 //
 //	Copyright 2005-2009 Sergey Kazenyuk, All Rights Reserved.
+//  Copyright 2018 Janus
 //	Distributed under the terms of the MIT License.
 //========================================================================
 //	$Id: AppWindow.cpp 12 2009-02-02 08:51:09Z sergey.kazenyuk $
