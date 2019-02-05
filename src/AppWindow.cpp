@@ -202,7 +202,7 @@ void AppWindow::GeneratePassword()
 
 	PassOut->SetText("");
 
-	string symbols;
+	std::string symbols;
 	if (UpperCaseCB->Value() == B_CONTROL_ON)
 		symbols += en_upsymbols;
 	if (LowerCaseCB->Value() == B_CONTROL_ON)

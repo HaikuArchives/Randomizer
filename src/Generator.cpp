@@ -5,7 +5,8 @@
 //	Distributed under the terms of the MIT License.
 //========================================================================
 
-#include <iostream.h>
+#include <iostream>
+#include <string.h>
 #include <stdlib.h>
 #include <OS.h>
 

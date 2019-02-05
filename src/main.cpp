@@ -5,7 +5,7 @@
 //	Distributed under the terms of the MIT License.
 //========================================================================
 
-#include <iostream.h>
+#include <iostream>
 #include "App.h"
 
 using namespace std;
