@@ -1,6 +1,6 @@
 //========================================================================
 //	AppWindow.cpp
-//	
+//
 //	Copyright 2005-2009 Sergey Kazenyuk, All Rights Reserved.
 //	Distributed under the terms of the MIT License.
 //========================================================================
@@ -22,8 +22,8 @@
 
 #include <string>
 
-#include "AppWindow.h"
 #include "App.h"
+#include "AppWindow.h"
 
 #define PREFS_FILENAME "Randomizer_settings"
 
@@ -32,13 +32,14 @@
 
 //====================================================================
 
-void Generator(char* password, const int &num, const char* symbols);
+void Generator(char* password, const int& num, const char* symbols);
 
 //====================================================================
 
 AppWindow::AppWindow(BRect frame)
-	: BWindow(frame, B_TRANSLATE_SYSTEM_NAME(App_Name), B_TITLED_WINDOW,
-		B_NOT_RESIZABLE|B_NOT_ZOOMABLE | B_AUTO_UPDATE_SIZE_LIMITS)
+	:
+	BWindow(frame, B_TRANSLATE_SYSTEM_NAME(App_Name), B_TITLED_WINDOW,
+		B_NOT_RESIZABLE | B_NOT_ZOOMABLE | B_AUTO_UPDATE_SIZE_LIMITS)
 {
 	PassOut = new BTextControl("PassOut", "", NULL, NULL);
 	PassOut->SetEnabled(false);
@@ -47,34 +48,34 @@ AppWindow::AppWindow(BRect frame)
 		new BMessage(SEQ_LEN_MSG));
 	PassLength->SetMinValue(1);
 	PassLength->SetValue(10);
-	
-	UpperCaseCB = new BCheckBox("UpperCaseCB", B_TRANSLATE("Upper case"),
-		new BMessage(UCASE_CB_MSG));
+
+	UpperCaseCB = new BCheckBox(
+		"UpperCaseCB", B_TRANSLATE("Upper case"), new BMessage(UCASE_CB_MSG));
 	UpperCaseCB->SetValue(B_CONTROL_ON);
 
-	LowerCaseCB = new BCheckBox( "LowerCaseCB", B_TRANSLATE("Lower case"),
-		new BMessage(LCASE_CB_MSG));
+	LowerCaseCB = new BCheckBox(
+		"LowerCaseCB", B_TRANSLATE("Lower case"), new BMessage(LCASE_CB_MSG));
 	LowerCaseCB->SetValue(B_CONTROL_ON);
-	
-	NumCB = new BCheckBox("NumCB", B_TRANSLATE("Numbers"),
-		new BMessage(NUMBERS_CB_MSG));
+
+	NumCB = new BCheckBox(
+		"NumCB", B_TRANSLATE("Numbers"), new BMessage(NUMBERS_CB_MSG));
 	NumCB->SetValue(B_CONTROL_ON);
-	
-	SpecSymbCB = new BCheckBox("SpecSymbCB", B_TRANSLATE("Symbols"),
-		new BMessage(SPEC_SYMB_CB_MSG));
-	
-	//Custom symbols checkbox
-	CustSymbCB = new BCheckBox("CustSymbCB", B_TRANSLATE("Custom:"),
-		new BMessage(CUST_SYMB_CB_MSG));
-	
-	//Custom symbols input field
-	CustSymb = new BTextControl("CustSymb", "", NULL,
-		new BMessage(CUST_SYMB_MSG));
+
+	SpecSymbCB = new BCheckBox(
+		"SpecSymbCB", B_TRANSLATE("Symbols"), new BMessage(SPEC_SYMB_CB_MSG));
+
+	// Custom symbols checkbox
+	CustSymbCB = new BCheckBox(
+		"CustSymbCB", B_TRANSLATE("Custom:"), new BMessage(CUST_SYMB_CB_MSG));
+
+	// Custom symbols input field
+	CustSymb
+		= new BTextControl("CustSymb", "", NULL, new BMessage(CUST_SYMB_MSG));
 	CustSymb->SetDivider(0);
 	CustSymb->SetEnabled(false);
-			
-	GenerateBtn = new BButton("GenBtn", B_TRANSLATE("Generate"),
-		new BMessage(GEN_BTN_MSG));
+
+	GenerateBtn = new BButton(
+		"GenBtn", B_TRANSLATE("Generate"), new BMessage(GEN_BTN_MSG));
 	GenerateBtn->MakeDefault(true);
 
 	font_height fh;
@@ -82,38 +83,40 @@ AppWindow::AppWindow(BRect frame)
 
 	const float iconSize = ceilf(fh.ascent) - 2.0;
 
-	CopyToClipboardBtn = new BButton("CopyToClipboardBtn", "",
-		new BMessage(COPY_BTN_MSG));
+	CopyToClipboardBtn
+		= new BButton("CopyToClipboardBtn", "", new BMessage(COPY_BTN_MSG));
 	CopyToClipboardBtn->SetIcon(ResourceVectorToBitmap("CLIPBOARD", iconSize));
 	CopyToClipboardBtn->SetToolTip(B_TRANSLATE("Copy to clipboard"));
 
-	BSeparatorView* separatorPasswordView = new BSeparatorView("generatedPassword",
-		B_TRANSLATE("Generated password"), B_HORIZONTAL, B_FANCY_BORDER,
-		BAlignment(B_ALIGN_LEFT, B_ALIGN_VERTICAL_CENTER));
+	BSeparatorView* separatorPasswordView = new BSeparatorView(
+		"generatedPassword", B_TRANSLATE("Generated password"), B_HORIZONTAL,
+		B_FANCY_BORDER, BAlignment(B_ALIGN_LEFT, B_ALIGN_VERTICAL_CENTER));
 
 	BLayoutBuilder::Group<>(this, B_VERTICAL, B_USE_SMALL_SPACING)
 		.Add(BuildMenuBar())
 		.AddGrid()
-			.SetInsets(B_USE_WINDOW_INSETS, B_USE_HALF_ITEM_INSETS, B_USE_WINDOW_INSETS, B_USE_WINDOW_INSETS)
-			.Add(UpperCaseCB, 0, 0)
-			.Add(LowerCaseCB, 0, 1)
-			.Add(NumCB, 1, 0)
-			.Add(SpecSymbCB, 1, 1)
-			.Add(CustSymbCB, 0, 2)
-			.Add(CustSymb, 1, 2)
-			.Add(PassLength, 0, 3, 2)
+		.SetInsets(B_USE_WINDOW_INSETS, B_USE_HALF_ITEM_INSETS,
+			B_USE_WINDOW_INSETS, B_USE_WINDOW_INSETS)
+		.Add(UpperCaseCB, 0, 0)
+		.Add(LowerCaseCB, 0, 1)
+		.Add(NumCB, 1, 0)
+		.Add(SpecSymbCB, 1, 1)
+		.Add(CustSymbCB, 0, 2)
+		.Add(CustSymb, 1, 2)
+		.Add(PassLength, 0, 3, 2)
 		.End()
 		.Add(separatorPasswordView)
 		.AddGroup(B_VERTICAL)
-			.SetInsets(B_USE_WINDOW_INSETS, 0, B_USE_WINDOW_INSETS, B_USE_WINDOW_INSETS)
-			.AddGroup(B_HORIZONTAL, 0)
-				.Add(PassOut)
-				.Add(CopyToClipboardBtn)
-			.End()
-			.AddGroup(B_HORIZONTAL)
-				.AddGlue()
-				.Add(GenerateBtn)
-			.End()
+		.SetInsets(
+			B_USE_WINDOW_INSETS, 0, B_USE_WINDOW_INSETS, B_USE_WINDOW_INSETS)
+		.AddGroup(B_HORIZONTAL, 0)
+		.Add(PassOut)
+		.Add(CopyToClipboardBtn)
+		.End()
+		.AddGroup(B_HORIZONTAL)
+		.AddGlue()
+		.Add(GenerateBtn)
+		.End()
 		.End();
 
 	SpecSymbCB->SetToolTip("!@#$%^&*");
@@ -126,7 +129,8 @@ AppWindow::AppWindow(BRect frame)
 
 //--------------------------------------------------------------------
 
-bool AppWindow::QuitRequested()
+bool
+AppWindow::QuitRequested()
 {
 	ArchivePreferences();
 	be_app->PostMessage(B_QUIT_REQUESTED);
@@ -135,34 +139,32 @@ bool AppWindow::QuitRequested()
 
 //--------------------------------------------------------------------
 
-void AppWindow::MessageReceived(BMessage* message)
+void
+AppWindow::MessageReceived(BMessage* message)
 {
-#ifdef DEBUG	
-	printf("AppWindow::MessageReceived: \n"); 
+#ifdef DEBUG
+	printf("AppWindow::MessageReceived: \n");
 	message->PrintToStream();
 #endif
-	switch(message->what)
-	{
+	switch (message->what) {
 		case GEN_BTN_MSG:
 		{
 			GeneratePassword();
-		}
-		break;
+		} break;
 		case COPY_BTN_MSG:
 		{
 			PassOut->TextView()->SelectAll();
 			PassOut->TextView()->Copy(be_clipboard);
-		}
-		break;
-		case CUST_SYMB_CB_MSG:	//Custom symbols checkbox set/unset
+		} break;
+		case CUST_SYMB_CB_MSG: // Custom symbols checkbox set/unset
 			if (CustSymbCB->Value() == B_CONTROL_ON)
 				CustSymb->SetEnabled(true);
 			else
 				CustSymb->SetEnabled(false);
-		break;
+			break;
 		case B_ABOUT_REQUESTED:
 			be_app->PostMessage(B_ABOUT_REQUESTED);
-		break;
+			break;
 		default:
 			BWindow::MessageReceived(message);
 	}
@@ -170,35 +172,37 @@ void AppWindow::MessageReceived(BMessage* message)
 
 //--------------------------------------------------------------------
 
-BMenuBar* AppWindow::BuildMenuBar()
+BMenuBar*
+AppWindow::BuildMenuBar()
 {
 	BMenuBar* menuBar = new BMenuBar("menubar");
 	BMenu* menu = new BMenu(B_TRANSLATE("App"));
 
 	menuBar->AddItem(menu);
-	
-	menu->AddItem(new BMenuItem(B_TRANSLATE("About"),
-		new BMessage(B_ABOUT_REQUESTED), 0, 0));
+
+	menu->AddItem(new BMenuItem(
+		B_TRANSLATE("About"), new BMessage(B_ABOUT_REQUESTED), 0, 0));
 
 	menu->AddSeparatorItem();
 
-	menu->AddItem(new BMenuItem(B_TRANSLATE("Copy to clipboard"),
-		new BMessage(COPY_BTN_MSG), 'C', 0));
+	menu->AddItem(new BMenuItem(
+		B_TRANSLATE("Copy to clipboard"), new BMessage(COPY_BTN_MSG), 'C', 0));
 
 	menu->AddSeparatorItem();
 
-	menu->AddItem(new BMenuItem(B_TRANSLATE("Quit"),
-		new BMessage(B_QUIT_REQUESTED), 'Q', 0));
+	menu->AddItem(new BMenuItem(
+		B_TRANSLATE("Quit"), new BMessage(B_QUIT_REQUESTED), 'Q', 0));
 
 	return menuBar;
 }
 
-void AppWindow::GeneratePassword()
+void
+AppWindow::GeneratePassword()
 {
 	const char en_upsymbols[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	const char en_lowsymbols[] = "abcdefghijklmnopqrstuvwxyz";
 	const char num_symbols[] = "0123456789";
-	const char spec_symbols[] = "!@#$%^&*";	//<-------
+	const char spec_symbols[] = "!@#$%^&*"; //<-------
 
 	PassOut->SetText("");
 
@@ -215,7 +219,7 @@ void AppWindow::GeneratePassword()
 		symbols += CustSymb->Text();
 
 	int pass_length = PassLength->Value();
-	char* password = new char [pass_length];
+	char* password = new char[pass_length];
 
 	Generator(password, pass_length, symbols.c_str());
 
@@ -223,7 +227,8 @@ void AppWindow::GeneratePassword()
 	delete[] password;
 }
 
-BBitmap* AppWindow::ResourceVectorToBitmap(const char *resName, float iconSize)
+BBitmap*
+AppWindow::ResourceVectorToBitmap(const char* resName, float iconSize)
 {
 	BResources res;
 	size_t size;
@@ -232,11 +237,12 @@ BBitmap* AppWindow::ResourceVectorToBitmap(const char *resName, float iconSize)
 	be_app->GetAppInfo(&appInfo);
 	BFile appFile(&appInfo.ref, B_READ_ONLY);
 	res.SetTo(&appFile);
-	BBitmap *aBmp = NULL;
-	const uint8* iconData = (const uint8*) res.LoadResource('VICN', resName, &size);
+	BBitmap* aBmp = NULL;
+	const uint8* iconData
+		= (const uint8*) res.LoadResource('VICN', resName, &size);
 
-	if (size > 0 ) {
-		aBmp = new BBitmap (BRect(0,0, iconSize, iconSize), 0, B_RGBA32);
+	if (size > 0) {
+		aBmp = new BBitmap(BRect(0, 0, iconSize, iconSize), 0, B_RGBA32);
 		status_t result = BIconUtils::GetVectorIcon(iconData, size, aBmp);
 		if (result != B_OK) {
 			delete aBmp;
@@ -287,7 +293,8 @@ AppWindow::ArchivePreferences()
 
 void
 AppWindow::UnarchivePreferences()
-{	BMessage message;
+{
+	BMessage message;
 	LoadPreferences(message);
 
 	int32 length;
@@ -302,7 +309,7 @@ AppWindow::UnarchivePreferences()
 		NumCB->SetValue(controlOn ? B_CONTROL_ON : B_CONTROL_OFF);
 	if (message.FindBool("SpecSymbCB", &controlOn) == B_OK)
 		SpecSymbCB->SetValue(controlOn ? B_CONTROL_ON : B_CONTROL_OFF);
-	if (message.FindBool("CustSymbCB", &controlOn) == B_OK)	{
+	if (message.FindBool("CustSymbCB", &controlOn) == B_OK) {
 		CustSymbCB->SetValue(controlOn ? B_CONTROL_ON : B_CONTROL_OFF);
 		CustSymb->SetEnabled(controlOn);
 	}

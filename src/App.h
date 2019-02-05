@@ -1,6 +1,6 @@
 //========================================================================
 //	App.h
-//	
+//
 //	Copyright 2005-2008 Sergey Kazenyuk, All Rights Reserved.
 //	Distributed under the terms of the MIT License.
 //========================================================================
@@ -17,12 +17,13 @@
 
 class App : public BApplication
 {
-	public:
-						App();
-		virtual void 	ReadyToRun();
-		virtual void 	AboutRequested();
-	private:
-		AppWindow		*MainWindow;
+public:
+	App();
+	virtual void ReadyToRun();
+	virtual void AboutRequested();
+
+private:
+	AppWindow* MainWindow;
 };
 
 #endif
