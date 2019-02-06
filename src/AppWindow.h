@@ -1,7 +1,8 @@
 //========================================================================
 //	AppWindow.h
-//	
+//
 //	Copyright 2005-2009 Sergey Kazenyuk, All Rights Reserved.
+//  Copyright 2018 Janus
 //	Distributed under the terms of the MIT License.
 //========================================================================
 //	$Id: AppWindow.h 11 2009-02-01 16:13:11Z sergey.kazenyuk $
@@ -27,33 +28,33 @@
 
 class AppWindow : public BWindow
 {
-	public:
-						AppWindow(BRect frame);
-		virtual void	MessageReceived(BMessage* message);
-		virtual bool	QuitRequested();
-	private:
-		BMenuBar*		BuildMenuBar();	//Menu bar setup
-		void			GeneratePassword();
-		BBitmap			*ResourceVectorToBitmap(const char *resName, float iconSize);
+public:
+	AppWindow(BRect frame);
+	virtual void MessageReceived(BMessage* message);
+	virtual bool QuitRequested();
 
-		BFile			PrefsFile(int32 mode);
-		void			SavePreferences(BMessage& msg);
-		void			LoadPreferences(BMessage& msg);
+private:
+	BMenuBar* BuildMenuBar(); // Menu bar setup
+	void GeneratePassword();
+	BBitmap* ResourceVectorToBitmap(const char* resName, float iconSize);
 
-		void			ArchivePreferences();
-		void			UnarchivePreferences();
+	BFile PrefsFile(int32 mode);
+	void SavePreferences(BMessage& msg);
+	void LoadPreferences(BMessage& msg);
 
-		BTextControl	*PassOut;		//Generated password output
-		BButton			*GenerateBtn;
-		BButton 		*CopyToClipboardBtn;
-		BSpinner		*PassLength;
-		BCheckBox		*UpperCaseCB;
-		BCheckBox		*LowerCaseCB;
-		BCheckBox		*NumCB;
-		BCheckBox		*SpecSymbCB;
-		BCheckBox		*CustSymbCB;	//Custom symbols checkbox
-		BTextControl	*CustSymb;		//Custom symbols input field		
+	void ArchivePreferences();
+	void UnarchivePreferences();
+
+	BTextControl* PassOut; // Generated password output
+	BButton* GenerateBtn;
+	BButton* CopyToClipboardBtn;
+	BSpinner* PassLength;
+	BCheckBox* UpperCaseCB;
+	BCheckBox* LowerCaseCB;
+	BCheckBox* NumCB;
+	BCheckBox* SpecSymbCB;
+	BCheckBox* CustSymbCB; // Custom symbols checkbox
+	BTextControl* CustSymb; // Custom symbols input field
 };
-	
-#endif
 
+#endif

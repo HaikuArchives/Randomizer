@@ -1,14 +1,14 @@
-Randomizer
+![Randomizer icon](./artwork/randomizer_icon_64.png) Randomizer
 ==========
 
-Random symbol sequence (e.g. password) generator for Haiku
+_Randomizer_ generates a random character sequence that can be used for passwords.   
+Its GUI is very simple and intuitive:
 
-Requirements:
-* 1. BeOS R5 or newer
+![Randomizer screenshot](./artwork/screenshot.png)
 
-Changes since last release:
-* See ChangeLog.
+The checkboxes limit the set of characters used for the password. If you activate just _Custom_, only the characters entered in its text field are used. _Password length_ lets you set an arbitrary length.   
+Reasonably secure passwords should use upper and lower case, numbers and symbols (if allowed by the service you plan to use the password for) and should be at least 12 characters long.
 
-License: MIT. See License for details.
+Clicking the _Generate_ button (or hitting ```RETURN``` after launch) creates a new password. Clicking the clipboard icon (or pressing ```ALT```+```C```) copies the generated password into the clipboard.
 
-Project webpage: http://randomizer.googlecode.com/
+As the settings are saved, once you tuned them to your needs, creating a new password is very quick: Launch _Randomizer_, hit ```RETURN``` a few times, press ```ALT```+```C```, then ```ALT```+```Q``` and you got your new password ready to use in the clipboard.
