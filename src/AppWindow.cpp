@@ -190,7 +190,7 @@ AppWindow::BuildMenuBar()
 	menuBar->AddItem(menu);
 
 	menu->AddItem(new BMenuItem(
-		B_TRANSLATE("About"), new BMessage(B_ABOUT_REQUESTED), 0, 0));
+		B_TRANSLATE("About Randomizer"), new BMessage(B_ABOUT_REQUESTED), 0, 0));
 
 	menu->AddSeparatorItem();
 
