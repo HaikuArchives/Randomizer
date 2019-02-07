@@ -27,4 +27,6 @@ const uint32 NUMBERS_CB_MSG = 'NumS';
 const uint32 SPEC_SYMB_CB_MSG = 'SpeS';
 const uint32 CUST_SYMB_CB_MSG = 'CuSC';
 
+const uint32 DEFAULT_LENGTH = 12;
+
 #endif

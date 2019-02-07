@@ -49,7 +49,7 @@ AppWindow::AppWindow(BRect frame)
 	PassLength = new BSpinner("PassLength", B_TRANSLATE("Password length:"),
 		new BMessage(SEQ_LEN_MSG));
 	PassLength->SetMinValue(1);
-	PassLength->SetValue(10);
+	PassLength->SetValue(DEFAULT_LENGTH);
 
 	UpperCaseCB = new BCheckBox(
 		"UpperCaseCB", B_TRANSLATE("Upper case"), new BMessage(UCASE_CB_MSG));
