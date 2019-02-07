@@ -297,6 +297,7 @@ AppWindow::ArchivePreferences()
 	message.AddBool("SpecSymbCB", SpecSymbCB->Value() == B_CONTROL_ON);
 	message.AddBool("CustSymbCB", CustSymbCB->Value() == B_CONTROL_ON);
 	message.AddString("CustSymb", CustSymb->Text());
+	message.AddPoint("WinOrigin", Frame().LeftTop());
 	SavePreferences(message);
 }
 
@@ -325,4 +326,10 @@ AppWindow::UnarchivePreferences()
 	BString symbols;
 	if (message.FindString("CustSymb", &symbols) == B_OK)
 		CustSymb->SetText(symbols);
+
+	BPoint origin;
+	if (message.FindPoint("WinOrigin", &origin) == B_OK) {
+		MoveTo(origin);
+		MoveOnScreen(B_MOVE_IF_PARTIALLY_OFFSCREEN);
+	}
 }
