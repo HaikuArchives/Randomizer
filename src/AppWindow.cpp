@@ -208,11 +208,6 @@ AppWindow::BuildMenuBar()
 void
 AppWindow::GeneratePassword()
 {
-	const char en_upsymbols[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	const char en_lowsymbols[] = "abcdefghijklmnopqrstuvwxyz";
-	const char num_symbols[] = "0123456789";
-	const char spec_symbols[] = "!@#$%^&*"; //<-------
-
 	PassOut->SetText("");
 
 	std::string symbols;
