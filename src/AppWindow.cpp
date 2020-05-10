@@ -192,12 +192,8 @@ AppWindow::BuildMenuBar()
 	menu->AddItem(new BMenuItem(
 		B_TRANSLATE("About Randomizer"), new BMessage(B_ABOUT_REQUESTED), 0, 0));
 
-	menu->AddSeparatorItem();
-
 	menu->AddItem(new BMenuItem(
 		B_TRANSLATE("Copy to clipboard"), new BMessage(COPY_BTN_MSG), 'C', 0));
-
-	menu->AddSeparatorItem();
 
 	menu->AddItem(new BMenuItem(
 		B_TRANSLATE("Quit"), new BMessage(B_QUIT_REQUESTED), 'Q', 0));

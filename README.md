@@ -14,6 +14,6 @@ As the settings are saved, once you tuned them to your needs, creating a new pas
 
 ## Thanks
 
-Thanks to all translators: Humdinger (de), unspacyar (es), Briseur (fr), KapiX (pl)
+Thanks to all translators: Humdinger (de), Alexey Lugin (uk), Briseur (fr), Davidmp (ca), Florentina (ro), Fredrik Modéen (sv), janus2 (it), KapiX (pl), mazbrili (id), miqlas (hu), TejasMate (hi), tmtfx (fur), unspacyar (es), Victor Domingos (pt), zvacet (hr)
 
 If you want to help with additional translation, you can do so at [PolyGlot](https://i18n.kacperkasper.pl).

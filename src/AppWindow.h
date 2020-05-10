@@ -24,11 +24,6 @@
 #include <TextControl.h>
 #include <Window.h>
 
-static const char en_upsymbols[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-static const char en_lowsymbols[] = "abcdefghijklmnopqrstuvwxyz";
-static const char num_symbols[] = "0123456789";
-static const char spec_symbols[] = "!@#$%^&*"; //<-------
-
 //====================================================================
 
 class AppWindow : public BWindow

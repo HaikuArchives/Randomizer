@@ -55,7 +55,7 @@ App::AboutRequested()
 		B_TRANSLATE_SYSTEM_NAME(App_Name), App_Sig);
 	const char* extraCopyrights[] = {
 		"2005-2009 Sergey S. Kazenyuk",
-		"2018-2019 Janus, Humdinger",
+		"2018-2020 Janus, Humdinger",
 		NULL
 	};
 	const char* authors[] = {

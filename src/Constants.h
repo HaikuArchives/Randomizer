@@ -29,4 +29,9 @@ const uint32 CUST_SYMB_CB_MSG = 'CuSC';
 
 const uint32 DEFAULT_LENGTH = 12;
 
+static const char en_upsymbols[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+static const char en_lowsymbols[] = "abcdefghijklmnopqrstuvwxyz";
+static const char num_symbols[] = "0123456789";
+static const char spec_symbols[] = "!@#$%^&*"; //<-------
+
 #endif
