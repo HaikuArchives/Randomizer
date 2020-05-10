@@ -227,11 +227,10 @@ AppWindow::GeneratePassword()
 	if (CustSymbCB->Value() == B_CONTROL_ON)
 		symbols += CustSymb->Text();
 
-	int pass_length = PassLength->Value();
+	int pass_length = PassLength->Value() + 1;
 	char* password = new char[pass_length];
 
 	Generator(password, pass_length, symbols.c_str());
-
 	PassOut->SetText(password);
 	delete[] password;
 }
