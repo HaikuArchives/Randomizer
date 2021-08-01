@@ -1,16 +1,16 @@
 1	German	application/x-vnd.kazenyuk-randomizer	3388132009
 About Randomizer	AppWindow		Über Randomizer
-Numbers	AppWindow		Zahlen
-Quit	AppWindow		Beenden
-Upper case	AppWindow		Großbuchstaben
+App	AppWindow		App
+Copy to clipboard	AppWindow		In Zwischenablage kopieren
+Custom set of characters	AppWindow		Ein Satz selbst definierter Zeichen
+Custom:	AppWindow		Eigene Zeichen:
 Generate	AppWindow		Erzeugen
 Generated password	AppWindow		Erzeugtes Kennwort
-Custom set of characters	AppWindow		Ein Satz selbst definierter Zeichen
-App	AppWindow		App
-Custom:	AppWindow		Eigene Zeichen:
 Lower case	AppWindow		Kleinbuchstaben
-Symbols	AppWindow		Symbole
+Numbers	AppWindow		Zahlen
 Password length:	AppWindow		Kennwortlänge:
-Copy to clipboard	AppWindow		In Zwischenablage kopieren
-Sergey S. Kazenyuk (original author)	Application		Sergey S. Kazenyuk (ursprünglicher Autor)
+Quit	AppWindow		Beenden
+Symbols	AppWindow		Symbole
+Upper case	AppWindow		Großbuchstaben
 Randomizer	System name		Randomizer
+Sergey S. Kazenyuk (original author)	Application		Sergey S. Kazenyuk (ursprünglicher Autor)

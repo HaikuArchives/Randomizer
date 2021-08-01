@@ -1,16 +1,16 @@
 1	Catalan	application/x-vnd.kazenyuk-randomizer	3388132009
 About Randomizer	AppWindow		Quant al Randomizer
-Numbers	AppWindow		Números
-Quit	AppWindow		Surt
-Upper case	AppWindow		Caixa alta
+App	AppWindow		Aplicació
+Copy to clipboard	AppWindow		Copia-ho al porta-retalls
+Custom set of characters	AppWindow		Conjunt de caràcters personalitzats
+Custom:	AppWindow		Personalització:
 Generate	AppWindow		Genera
 Generated password	AppWindow		Contrasenya generada
-Custom set of characters	AppWindow		Conjunt de caràcters personalitzats
-App	AppWindow		Aplicació
-Custom:	AppWindow		Personalització:
 Lower case	AppWindow		Caixa baixa
-Symbols	AppWindow		Símbols
+Numbers	AppWindow		Números
 Password length:	AppWindow		Llargada de la contrasenya:
-Copy to clipboard	AppWindow		Copia-ho al porta-retalls
-Sergey S. Kazenyuk (original author)	Application		Sergey S. Kazenyuk (autor original)
+Quit	AppWindow		Surt
+Symbols	AppWindow		Símbols
+Upper case	AppWindow		Caixa alta
 Randomizer	System name		Aleatoritzador
+Sergey S. Kazenyuk (original author)	Application		Sergey S. Kazenyuk (autor original)

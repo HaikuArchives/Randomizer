@@ -1,16 +1,16 @@
 1	Romanian	application/x-vnd.kazenyuk-randomizer	3388132009
 About Randomizer	AppWindow		Despre Randomizer
-Numbers	AppWindow		Numere
-Quit	AppWindow		Ieșire
-Upper case	AppWindow		Majuscule
+App	AppWindow		Aplicație
+Copy to clipboard	AppWindow		Copiază la clipboard
+Custom set of characters	AppWindow		Set de caractere personalizat
+Custom:	AppWindow		Personalizat:
 Generate	AppWindow		Generează
 Generated password	AppWindow		Parolă generată
-Custom set of characters	AppWindow		Set de caractere personalizat
-App	AppWindow		Aplicație
-Custom:	AppWindow		Personalizat:
 Lower case	AppWindow		Minuscule
-Symbols	AppWindow		Simboluri
+Numbers	AppWindow		Numere
 Password length:	AppWindow		Lungime parolă:
-Copy to clipboard	AppWindow		Copiază la clipboard
-Sergey S. Kazenyuk (original author)	Application		Sergey S. Kazenyuk (autorul original)
+Quit	AppWindow		Ieșire
+Symbols	AppWindow		Simboluri
+Upper case	AppWindow		Majuscule
 Randomizer	System name		Randomizer
+Sergey S. Kazenyuk (original author)	Application		Sergey S. Kazenyuk (autorul original)

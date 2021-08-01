@@ -1,16 +1,16 @@
 1	Ukrainian	application/x-vnd.kazenyuk-randomizer	3388132009
 About Randomizer	AppWindow		Про Randomizer
-Numbers	AppWindow		Цифри
-Quit	AppWindow		Вийти
-Upper case	AppWindow		Верхній регістр
+App	AppWindow		Програма
+Copy to clipboard	AppWindow		Копіювати до буфера
+Custom set of characters	AppWindow		Власний набір символів
+Custom:	AppWindow		Власний:
 Generate	AppWindow		Генерувати
 Generated password	AppWindow		Згенерований пароль
-Custom set of characters	AppWindow		Власний набір символів
-App	AppWindow		Програма
-Custom:	AppWindow		Власний:
 Lower case	AppWindow		Нижній регістр
-Symbols	AppWindow		Символи
+Numbers	AppWindow		Цифри
 Password length:	AppWindow		Довжина пароля:
-Copy to clipboard	AppWindow		Копіювати до буфера
-Sergey S. Kazenyuk (original author)	Application		Сергій С. Казенюк (автор оригіналу)
+Quit	AppWindow		Вийти
+Symbols	AppWindow		Символи
+Upper case	AppWindow		Верхній регістр
 Randomizer	System name		Randomizer
+Sergey S. Kazenyuk (original author)	Application		Сергій С. Казенюк (автор оригіналу)

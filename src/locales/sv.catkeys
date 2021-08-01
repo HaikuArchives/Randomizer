@@ -1,16 +1,16 @@
 1	Swedish	application/x-vnd.kazenyuk-randomizer	3388132009
 About Randomizer	AppWindow		Om Randomizer
-Numbers	AppWindow		Nummer
-Quit	AppWindow		Avsluta
-Upper case	AppWindow		Versaler
+App	AppWindow		App
+Copy to clipboard	AppWindow		Kopiera till urklipp 
+Custom set of characters	AppWindow		Anpassad uppsättning av tecken
+Custom:	AppWindow		Anpassad:
 Generate	AppWindow		Generera
 Generated password	AppWindow		Genererat lösenord
-Custom set of characters	AppWindow		Anpassad uppsättning av tecken
-App	AppWindow		App
-Custom:	AppWindow		Anpassad:
 Lower case	AppWindow		Gemener
-Symbols	AppWindow		Symbols
+Numbers	AppWindow		Nummer
 Password length:	AppWindow		Lösenords längd:
-Copy to clipboard	AppWindow		Kopiera till urklipp 
-Sergey S. Kazenyuk (original author)	Application		Sergey S. Kazenyuk (originalförfattare)
+Quit	AppWindow		Avsluta
+Symbols	AppWindow		Symbols
+Upper case	AppWindow		Versaler
 Randomizer	System name		Randomizer
+Sergey S. Kazenyuk (original author)	Application		Sergey S. Kazenyuk (originalförfattare)

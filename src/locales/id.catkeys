@@ -1,16 +1,16 @@
 1	Indonesian	application/x-vnd.kazenyuk-randomizer	3388132009
 About Randomizer	AppWindow		Tentang Randomizer
-Numbers	AppWindow		Angka
-Quit	AppWindow		Keluar
-Upper case	AppWindow		Huruf besar
+App	AppWindow		Aplikasi
+Copy to clipboard	AppWindow		Menyalin ke clipboard
+Custom set of characters	AppWindow		Kumpulan karakter khusus
+Custom:	AppWindow		Khusus:
 Generate	AppWindow		Hasilkan
 Generated password	AppWindow		Sandi yang dihasilkan
-Custom set of characters	AppWindow		Kumpulan karakter khusus
-App	AppWindow		Aplikasi
-Custom:	AppWindow		Khusus:
 Lower case	AppWindow		Huruf kecil
-Symbols	AppWindow		Simbol
+Numbers	AppWindow		Angka
 Password length:	AppWindow		Panjang sandi:
-Copy to clipboard	AppWindow		Menyalin ke clipboard
-Sergey S. Kazenyuk (original author)	Application		Sergey S. Kazenyuk (penulis asli)
+Quit	AppWindow		Keluar
+Symbols	AppWindow		Simbol
+Upper case	AppWindow		Huruf besar
 Randomizer	System name		Randomizer
+Sergey S. Kazenyuk (original author)	Application		Sergey S. Kazenyuk (penulis asli)

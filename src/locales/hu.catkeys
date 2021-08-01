@@ -1,16 +1,16 @@
 1	Hungarian	application/x-vnd.kazenyuk-randomizer	3388132009
 About Randomizer	AppWindow		A Randomizer névjegye
-Numbers	AppWindow		Számok
-Quit	AppWindow		Kilépés
-Upper case	AppWindow		Nagybetűs
+App	AppWindow		Program
+Copy to clipboard	AppWindow		Vágólapra másol
+Custom set of characters	AppWindow		Egyéni karakterkészlet
+Custom:	AppWindow		Egyedi:
 Generate	AppWindow		Létrehoz
 Generated password	AppWindow		A létrehozott jelszó
-Custom set of characters	AppWindow		Egyéni karakterkészlet
-App	AppWindow		Program
-Custom:	AppWindow		Egyedi:
 Lower case	AppWindow		Kisbetűs
-Symbols	AppWindow		Szimbólumok
+Numbers	AppWindow		Számok
 Password length:	AppWindow		Jelszó hossza:
-Copy to clipboard	AppWindow		Vágólapra másol
-Sergey S. Kazenyuk (original author)	Application		Sergey S. Kazenyuk (eredeti szerző)
+Quit	AppWindow		Kilépés
+Symbols	AppWindow		Szimbólumok
+Upper case	AppWindow		Nagybetűs
 Randomizer	System name		Randomizer
+Sergey S. Kazenyuk (original author)	Application		Sergey S. Kazenyuk (eredeti szerző)
